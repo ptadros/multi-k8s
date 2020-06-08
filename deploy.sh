@@ -12,5 +12,5 @@ docker push ptadros/multi-worker:$SHA
 
 kubectl apply -f k8s/
 kubectl set image deployments/server-deploy server=ptadros/multi-server:$SHA
-kubectl set image deployments/client-deploy server=ptadros/multi-client:$SHA
-kubectl set image deployments/worker-deploy server=ptadros/multi-worker:$SHA
+kubectl set image deployments/client-deploy client=ptadros/multi-client:$SHA
+kubectl set image deployments/worker-deploy worker=ptadros/multi-worker:$SHA
