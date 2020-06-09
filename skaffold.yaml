@@ -13,8 +13,25 @@ build:
           - '**/*.js'
           - '**/*.css'
           - '**/*.html'
-
+    - image: ptadros/multi-server
+      context: server
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        infer:
+          - '**/*.js'
+    - image: ptadros/multi-worker
+      context: worker
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        infer:
+          - '**/*.js'
 deploy:
   kubectl:
     manifests:
       - k8s/client-deploy.yaml
+      - k8s/server-deploy.yaml
+      - k8s/worker-deploy.yaml
+      - k8s/server-cluster-ip-service.yaml
+      - k8s/client-cluster-ip-service.yaml
